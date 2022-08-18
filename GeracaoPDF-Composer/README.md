@@ -1,11 +1,13 @@
-## Para executar esse projeto
+# Para executar esse Projeto
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
    
-1º Clone this repository
-2º In your terminal: verify composer with 
+- Step 1: Clone this repository
+
+- Step 2: In your terminal verify composer with 
 ```
 composer --version
 ```
-3º use 
+- Step 3: use 
 ```
 composer install 
 ```
