@@ -1,0 +1,14 @@
+{
+    "name": "camil/geracao-pdf-composer",
+    "description": "Estudando Composer e Geracao de PDF",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Camila da Costa",
+            "email": "camila.coosta99@gmail.com"
+        }
+    ],
+    "require": {
+        "mpdf/mpdf": "8.0.13"
+    }
+}
