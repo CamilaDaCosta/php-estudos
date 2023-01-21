@@ -1,17 +1,26 @@
 <?php
+/**
+ * Exception é a classe base para todas as Exceptions
+ * message, code, file, line
+ */
 
-class Pessoa{
-    public $idade;
-
-    public function __clone(){
-        echo "Clonagem de objetos ";
+class NewsLetter{
+    public function cadastrarEmail($email){
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            throw new Exception("Este email é inválido!", 1);
+        }else{
+            echo "Cadastrado";
+        }
     }
 }
 
-$pessoa = new Pessoa();
-$pessoa->idade = 25;
+$newsletter = new NewsLetter();
 
-$pessoa2 = clone $pessoa;
-$pessoa2->idade = 35;
-
-echo $pessoa->idade;
+try{
+    $newsletter->cadastrarEmail("teste@");
+}catch(Exception $e){
+    echo "Message: {$e->getMessage()}<br>";
+    echo "Code: {$e->getCode()}<br>";
+    echo "Line: {$e->getLine()}<br>";
+    echo "File: {$e->getFile()}<br>";    
+}
