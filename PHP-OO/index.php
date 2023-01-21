@@ -1,18 +1,32 @@
 <?php
 
-class Login{
-    public static $user;
+/**
+ * POLIMORFISMO: sobreescrever um metodo herdadado
+ * @Override
+ */
 
-    public static function vericarLogin(){
-        echo self::$user." Logado";
+class Animal{
+    public function Andar(){
+        echo "Animal andou";
     }
 
-    public function sair(){
-        echo "<hr>Deslogou";
+    public function Correr(){
+        echo "Animal correu";
     }
 }
-Login::$user = "admin";//atributo static
-Login::vericarLogin();//metodo static
 
-$login = new Login();//instance
-$login->sair();//metodo de classe
+class Cavalo extends Animal{
+    public function Andar(){
+        echo "Cavalo andou";
+        $this->Correr();
+    }
+}
+
+$animal = new Cavalo();
+$animal->Andar();
+
+echo "<hr>";
+
+$animal = new Animal();
+$animal->Andar();
+$animal->Correr();
