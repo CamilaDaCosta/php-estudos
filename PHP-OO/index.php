@@ -1,59 +1,45 @@
 <?php
-
 /**
- * Herança é o recurso que permite que classes compartilhem atributos e
- * métodos afim de reaproveitar códigos ou comportamentos generalizados
- * classes que ultilizem o mesmo código são herdados
+ * PRIVATE: apenas acessivel pela propria classe
+ * PROTECTED: acessivel pela propria classe e suas filhas
+ * PUBLIC: acessivel nos dois escopos
  */
 
- class Veiculo{//CLASSE MÃE
-    protected $modelo;
-    public $cor;
+class Veiculo{
+    private $modelo;
+    protected $cor;
     public $ano;
 
-    public function setModelo($e){
+    public function setPrivateModelo($e){
         $this->modelo = $e;
     }
-
-    public function getModelo(){
+    public function getPrivateModelo(){
         return $this->modelo;
-    }
+    }    
 
     public function Andar(){
-        echo "Andando<br>";
+        echo "Andou";
     }
     public function Parar(){
-        echo "<br>Parada";
+        echo "Parou";
     }
 }
 
-class Carro extends Veiculo{//CLASSE EXTENDIDA COM ATTR ESPECIFICOS
-    public function limparParabrisa(){
-        echo "Limpando Parabrisa!<br>";
+class Carro extends Veiculo{
+    public function setProtectedCor($e){
+        $this->cor = $e;
+    }
+    public function getProtectedCor(){
+        return $this->cor;
     }
 }
 
-class Moto extends Veiculo{//CLASSE EXTENDIDA COM ATTR ESPECIFICOS
-    public function trocarCorrente(){
-        echo "<br>Trocando Corrente!";
-    }
-}
+$veiculo = new Carro();
+$veiculo->setPrivateModelo("Uno");//metodo da classe veiculo
+$veiculo->setProtectedCor("red");//metodo da classe carro
+$veiculo->ano = "2022";
+echo $veiculo->getPrivateModelo()."<br>"
+    .$veiculo->getProtectedCor()."<br>"
+    .$veiculo->ano."<br>";
 
-$carro = new Carro();
-$carro->setModelo("UNO");
-$carro->cor = "Branco";
-$carro->ano = "2020";
-$carro->Andar();
-$carro->limparParabrisa();
-
-echo "Carro: " .$carro->getModelo().'|'.$carro->cor.'|'.$carro->ano;
-
-echo "<hr>";
-
-$moto = new Moto();
-$moto->setModelo("FAN");
-$moto->cor = "Vermelha";
-$moto->ano = "2019";
-echo "Moto: " .$moto->getModelo().'|'.$moto->cor.'|'.$moto->ano;
-$moto->trocarCorrente();
-$moto->Parar();
+var_dump($veiculo);
