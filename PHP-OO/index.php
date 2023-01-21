@@ -1,37 +1,41 @@
 <?php
 /**
- * PRIVATE: apenas acessivel pela propria classe
- * PROTECTED: acessivel pela propria classe e suas filhas
- * PUBLIC: acessivel nos dois escopos
+ * ABSTRATA: define regras que as classes que a implementarem devem 
+ * seguir obrigatoriamente
  */
 
-class Veiculo{
-    public $modelo;
-    public $cor;
-    public $ano;   
+abstract class Banco{
+    protected $saldo;
+    protected $limiteSaque;
+    protected $juros;
 
-    private function Andar(){
-        echo "Andou<br>";
-    }
-    protected function Parar(){
-        echo "Parou<br>";
+    abstract protected function Sacar($s);
+    abstract protected function Depositar($d);
+
+    public function setSaldo($s){
+        $this->saldo = $s;
     }
 
-    public function mostrarAcao(){
-        $this->Andar();
-        $this->Parar();
+    public function getSaldo(){return $this->saldo;}
+}
+
+class Banco1 extends Banco{
+    public function Sacar($s)
+    {
+        $this->saldo -= $s;
+        echo "<hr>- {$s} [Saque]";
+    }
+    public function Depositar($d)
+    {
+        $this->saldo += $d;
+        echo "<hr>+ {$d} [Depósito]";
     }
 }
 
-class Carro extends Veiculo{
-    public function mostrarAcao(){
-        //$this->Andar();//ESSA CLASSE NÃO PODE VER PRIVATE
-        $this->Parar();//ESSA CLASSE PODE VER PROTECTED
-    }
-}
-
-$private = new Veiculo();
-$private->mostrarAcao();
-
-$protectedCarro = new Carro();
-$protectedCarro->mostrarAcao();
+$b1 = new Banco1();
+$b1->setSaldo(1000);
+echo "<hr>Saldo = {$b1->getSaldo()}";
+$b1->Sacar(200);
+echo "<hr>Saldo = {$b1->getSaldo()}";
+$b1->Depositar(500);
+echo "<hr>Saldo = {$b1->getSaldo()}";
