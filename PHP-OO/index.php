@@ -1,29 +1,39 @@
 <?php
 
 /**
- * COMPOSIÇÃO: uma classe cria a instancia de outra classe dentro de si
- * mesma, quando ela for destruída a instancia da outra classe também será
+ * MAGIC METHODS
+ * __set()
+ * __get()
+ * __toString()
+ * __invoke()
  */
 
 class Pessoa{
-    public function atribuiNome($nome){
-        return "O nome da pessoa é {$nome}";
+    private $dados = array();
+
+    public function __set($nome, $valor){
+        $this->dados[$nome] = $valor;
+
+    }
+
+    public function __get($nome){
+        return $this->dados[$nome];
+    }
+
+    public function __toString(){
+        return "Nome: {$this->dados['nome']}";
+    }
+
+    public function __invoke(){
+        return "Objeto como função";
     }
 }
 
-class Exibe{
-    public $pessoa;
-    public $nome;
+$pessoa = new Pessoa();
+$pessoa->nome = "camila";
+$pessoa->idade = "23";
+$pessoa->endereco = "centro";
 
-    function __construct($nome){
-        $this->pessoa = new Pessoa();//composição
-        $this->nome = $nome;
-    }
+echo $pessoa();
 
-    public function exibeNome(){
-        echo $this->pessoa->atribuiNome($this->nome);
-    }
-}
-
-$exibe = new Exibe("Camila");
-$exibe->exibeNome();
+//echo "{$pessoa->nome}.{$pessoa->idade}.{$pessoa->endereco}";
