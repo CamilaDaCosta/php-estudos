@@ -1,46 +1,59 @@
 <?php
 
-class Login{
-    private $email;
-    private $senha;
-    private $nome;
+/**
+ * Herança é o recurso que permite que classes compartilhem atributos e
+ * métodos afim de reaproveitar códigos ou comportamentos generalizados
+ * classes que ultilizem o mesmo código são herdados
+ */
 
-    public function __construct($email, $senha, $nome)//método construtor
-    {
-        $this->nome = $nome;
-        $this->setEmail($email);
-        $this->setSenha($senha);
-    }
+ class Veiculo{//CLASSE MÃE
+    protected $modelo;
+    public $cor;
+    public $ano;
 
-    public function setEmail($e){
-        $email = filter_var($e, FILTER_SANITIZE_EMAIL);//seta o dado passado como parametro na variavel da class e usa filter_var para excluir dados fora do padrão
-        $this->email = $email;
-    }
-    public function getEmail(){
-        return $this->email;//acessa o dado private
+    public function setModelo($e){
+        $this->modelo = $e;
     }
 
-    public function setSenha($e){
-        $this->senha = $e;
-    }
-    public function getSenha(){
-        return $this->senha;
+    public function getModelo(){
+        return $this->modelo;
     }
 
-    public function getNome(){
-        return $this->nome;
+    public function Andar(){
+        echo "Andando<br>";
     }
-
-    public function Logar(){
-        if($this->email == "teste@teste.com" && $this->senha == "123456"){
-            echo "Logado com sucesso<br>";
-        }else{
-            echo "Dados Invalidos";
-        }
+    public function Parar(){
+        echo "<br>Parada";
     }
 }
 
-$login = new Login("teste@teste.com","123456","camila");
-$login->Logar();
+class Carro extends Veiculo{//CLASSE EXTENDIDA COM ATTR ESPECIFICOS
+    public function limparParabrisa(){
+        echo "Limpando Parabrisa!<br>";
+    }
+}
 
-echo $login->getEmail() .' | '. $login->getSenha() ." | ".$login->getNome();
+class Moto extends Veiculo{//CLASSE EXTENDIDA COM ATTR ESPECIFICOS
+    public function trocarCorrente(){
+        echo "<br>Trocando Corrente!";
+    }
+}
+
+$carro = new Carro();
+$carro->setModelo("UNO");
+$carro->cor = "Branco";
+$carro->ano = "2020";
+$carro->Andar();
+$carro->limparParabrisa();
+
+echo "Carro: " .$carro->getModelo().'|'.$carro->cor.'|'.$carro->ano;
+
+echo "<hr>";
+
+$moto = new Moto();
+$moto->setModelo("FAN");
+$moto->cor = "Vermelha";
+$moto->ano = "2019";
+echo "Moto: " .$moto->getModelo().'|'.$moto->cor.'|'.$moto->ano;
+$moto->trocarCorrente();
+$moto->Parar();
