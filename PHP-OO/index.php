@@ -1,26 +1,36 @@
 <?php
+
 /**
- * Exception é a classe base para todas as Exceptions
- * message, code, file, line
+ * ASSOCIAÇÃO: quando um objeto utiliza outro porém sem que haja dependência
  */
 
-class NewsLetter{
-    public function cadastrarEmail($email){
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            throw new Exception("Este email é inválido!", 1);
-        }else{
-            echo "Cadastrado";
-        }
-    }
+class Pedido{
+    public $numero;
+    public $cliente;
 }
 
-$newsletter = new NewsLetter();
-
-try{
-    $newsletter->cadastrarEmail("teste@");
-}catch(Exception $e){
-    echo "Message: {$e->getMessage()}<br>";
-    echo "Code: {$e->getCode()}<br>";
-    echo "Line: {$e->getLine()}<br>";
-    echo "File: {$e->getFile()}<br>";    
+class Cliente{
+    public $nome;
+    public $endereco;
 }
+
+$cliente = new Cliente();
+$cliente->nome = "Camila Costa";
+$cliente->endereco = "Rua centro";
+
+$pedido = new Pedido();
+$pedido->numero = "001";
+$pedido->cliente = $cliente;//associacao
+
+$data = array(
+    'numero' => $pedido->numero,
+    'nome_cliente' => $pedido->cliente->nome,
+    'endereco_cliente' => $pedido->cliente->endereco
+);
+var_dump($pedido);
+echo "<hr>";
+
+var_dump($data);
+echo "<hr>";
+
+echo $data['numero'];
