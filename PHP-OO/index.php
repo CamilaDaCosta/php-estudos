@@ -1,22 +1,18 @@
 <?php
 
-class Pessoa{
-    const NOME = "Camila";
+class Login{
+    public static $user;
 
-    public function exibirNome(){
-        echo self::NOME;
-    }
-}
-
-class Camila extends Pessoa{
-    const NOME = "Costa";
-
-    public function exibirNome(){
-        echo self::NOME;//do mesmo escopo
-        echo parent::NOME;//do escopo herdado
+    public static function vericarLogin(){
+        echo self::$user." Logado";
     }
 
+    public function sair(){
+        echo "<hr>Deslogou";
+    }
 }
+Login::$user = "admin";//atributo static
+Login::vericarLogin();//metodo static
 
-$pessoa = new Camila();
-$pessoa->exibirNome();
+$login = new Login();//instance
+$login->sair();//metodo de classe
