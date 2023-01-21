@@ -1,36 +1,43 @@
 <?php
 
 /**
- * ASSOCIAÇÃO: quando um objeto utiliza outro porém sem que haja dependência
+ * AGREGAÇÃO: quando uma classe precisa de outra para executar sua ação
+ * uma classe que usa outra como parte de si mesma
  */
 
-class Pedido{
-    public $numero;
-    public $cliente;
+class Produtos{
+    public $name;
+    public $valor;
+
+    public function __construct($name, $valor){
+        $this->name = $name;
+        $this->valor = $valor;
+    }
 }
 
-class Cliente{
-    public $nome;
-    public $endereco;
+class Carrinho{
+    public $produtos;
+
+    public function adiciona(Produtos $produto){//agregacao
+        $this->produtos[] = $produto;
+    }
+
+    public function exibir(){
+        foreach($this->produtos as $produto ){
+            echo $produto->name . "<br>";
+            echo $produto->valor . "<hr>";
+        }
+    }
 }
 
-$cliente = new Cliente();
-$cliente->nome = "Camila Costa";
-$cliente->endereco = "Rua centro";
+//$produto1 = new Produtos("P1",1200);
+$produto2 = new Produtos("P2",100);
+$produto3 = new Produtos("P3",80);
 
-$pedido = new Pedido();
-$pedido->numero = "001";
-$pedido->cliente = $cliente;//associacao
+$carrinho = new Carrinho();
+$carrinho->adiciona(new Produtos("P1",1200));
+$carrinho->adiciona($produto2);
+$carrinho->adiciona($produto3);
 
-$data = array(
-    'numero' => $pedido->numero,
-    'nome_cliente' => $pedido->cliente->nome,
-    'endereco_cliente' => $pedido->cliente->endereco
-);
-var_dump($pedido);
-echo "<hr>";
+$carrinho->exibir();
 
-var_dump($data);
-echo "<hr>";
-
-echo $data['numero'];
