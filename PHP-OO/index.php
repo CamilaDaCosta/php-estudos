@@ -6,40 +6,32 @@
  */
 
 class Veiculo{
-    private $modelo;
-    protected $cor;
-    public $ano;
+    public $modelo;
+    public $cor;
+    public $ano;   
 
-    public function setPrivateModelo($e){
-        $this->modelo = $e;
+    private function Andar(){
+        echo "Andou<br>";
     }
-    public function getPrivateModelo(){
-        return $this->modelo;
-    }    
+    protected function Parar(){
+        echo "Parou<br>";
+    }
 
-    public function Andar(){
-        echo "Andou";
-    }
-    public function Parar(){
-        echo "Parou";
+    public function mostrarAcao(){
+        $this->Andar();
+        $this->Parar();
     }
 }
 
 class Carro extends Veiculo{
-    public function setProtectedCor($e){
-        $this->cor = $e;
-    }
-    public function getProtectedCor(){
-        return $this->cor;
+    public function mostrarAcao(){
+        //$this->Andar();//ESSA CLASSE NÃO PODE VER PRIVATE
+        $this->Parar();//ESSA CLASSE PODE VER PROTECTED
     }
 }
 
-$veiculo = new Carro();
-$veiculo->setPrivateModelo("Uno");//metodo da classe veiculo
-$veiculo->setProtectedCor("red");//metodo da classe carro
-$veiculo->ano = "2022";
-echo $veiculo->getPrivateModelo()."<br>"
-    .$veiculo->getProtectedCor()."<br>"
-    .$veiculo->ano."<br>";
+$private = new Veiculo();
+$private->mostrarAcao();
 
-var_dump($veiculo);
+$protectedCarro = new Carro();
+$protectedCarro->mostrarAcao();
