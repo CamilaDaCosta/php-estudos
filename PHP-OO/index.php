@@ -1,15 +1,17 @@
 <?php
 
-require 'classes/produto.php';
-require 'models/produto.php';
+class Pessoa{
+    public $idade;
 
-use classes\Produto as productClasses;
-use models\Produto as productModels;
+    public function __clone(){
+        echo "Clonagem de objetos ";
+    }
+}
 
-$produto = new productClasses();
-$produto->mostrarDetalhes();
+$pessoa = new Pessoa();
+$pessoa->idade = 25;
 
-echo '<br>';
+$pessoa2 = clone $pessoa;
+$pessoa2->idade = 35;
 
-$produto2 = new productModels();
-$produto2->mostrarDetalhes();
+echo $pessoa->idade;
