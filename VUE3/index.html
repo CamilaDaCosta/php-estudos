@@ -7,22 +7,26 @@
 </head>
 <body>
     <div id="app">
-        <h1>Curso de Vue 3</h1>
+        <div :style="styles">
+            <label for="themeBlack">
+                <input type="checkbox" :checked="themeBlack" @click="toogleTheme" name="themeBlack" id="themeBlack">mudar fundo
+            </label>
+            <h1>Curso de Vue 3</h1>
 
-        <p>{{ name }} {{ lastName }}</p>         
-        <hr>   
-        <h3>Carrinho ({{cart.length}})</h3>    
+            <p>{{ fullName }}</p>         
+            <hr>   
+            <h3>Carrinho ({{cart.length}})</h3>    
 
-        <ul>
-            <li v-for="film in films">
-                <p>{{ film.title }}</p>
-                <img v-bind:src="film.image" v-bind:alt="film.title" style="max-width: 100px;">
-                <strong>{{ film.stars }}</strong>
-                <a href="#" @click.prevent="removeCart(film)" v-if="inCart(film)">-</a>
-                <a href="#" v-on:click.prevent="addCart(film)" v-else>+</a>
-            </li>
-        </ul>
-
+            <ul>
+                <li v-for="film in films">
+                    <p>{{ film.title }}</p>
+                    <img v-bind:src="film.image" v-bind:alt="film.title" style="max-width: 100px;">
+                    <strong>{{ film.stars }}</strong>
+                    <a href="#" @click.prevent="removeCart(film)" v-if="inCart(film)">-</a>
+                    <a href="#" v-on:click.prevent="addCart(film)" v-else>+</a>
+                </li>
+            </ul>
+        </div>        
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./js/app.js"></script>

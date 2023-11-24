@@ -15,9 +15,21 @@ const app = {
                     stars: 5,
                 }
             ],
-            cart: [],
-        }        
+            cart: [],            
+            styles:{
+                backgroundColor: '#fff',
+                color: '#000'
+            },
+            themeBlack: false            
+        } 
     },
+
+    computed: {
+        fullName(){
+            return this.name + ' ' +this.lastName;
+        }
+    },
+
     methods: {
         addCart(film){
             this.cart.push(film);
@@ -30,6 +42,17 @@ const app = {
         removeCart(film){
             this.cart = this.cart.filter((value, index) => film != value)
         },
+
+        toogleTheme(){
+            this.themeBlack = !this.themeBlack;
+            if (this.themeBlack){
+                this.styles.backgroundColor = '#000',
+                this.styles.color = '#fff'
+            }else{                            
+                this.styles.backgroundColor = '#fff',
+                this.styles.color = '#000'                
+            }
+        }
     },
 }
 
