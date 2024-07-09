@@ -1,21 +1,15 @@
-<?php
-$host = "mysql";
-$db = 'curso'; //getenv('MYSQL_DATABASE');
-$user = 'curso';//getenv('MYSQL_USER');
-$password = 'curso';//getenv('MYSQL_PASSWORD');
-
-try {
-	$dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";    
-	
-	$pdo = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
-	if ($pdo) {
-		echo "Connected to the $db database successfully!";
-	}
-} catch (PDOException $e) {
-	die($e->getMessage());
-} finally {
-	if (isset($pdo)) {
-		$pdo = null;
-	}
-}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Php estudos</title>
+</head>
+<body>
+	<?php 
+		date_default_timezone_set('America/Sao_Paulo');
+		echo "Hoje é dia " . date('d');
+		echo " e a hora atual " . date('G:i:s');
+	?>
+</body>
+</html>
