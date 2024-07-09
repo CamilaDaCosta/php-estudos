@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VUE3</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <div id="app">
@@ -21,9 +22,8 @@
                 <li v-for="film in films">
                     <p>{{ film.title }}</p>
                     <img v-bind:src="film.image" v-bind:alt="film.title" style="max-width: 100px;">
-                    <strong>{{ film.stars }}</strong>
-                    <a href="#" @click.prevent="removeCart(film)" v-if="inCart(film)">-</a>
-                    <a href="#" v-on:click.prevent="addCart(film)" v-else>+</a>
+                    <strong>{{ film.stars }}</strong>                    
+                    <button @click.prevent="addCart(film)" :disabled="inCart(film)" :class="{'button-disabled': inCart(film)}">+</button>
                 </li>
             </ul>
         </div>        

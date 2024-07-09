@@ -1,21 +1,29 @@
-# Instalar composer no container docker
-Nesta etapa do curso foi mostrado como instalar o [composer](https://getcomposer.org/), no caso como estou utilizando os conteinerers docker realizei os seguintes procedimentos:
+# Configurar virtual-host name
 Entrei no container
 ```
 docker exec -it poo-web bash
 ```
-
-Baixei o composer
+Instalei o nano no container para poder alterar o arquivo de virtual hosts
 ```
-curl -sS https://getcomposer.org/installer -o composer-setup.php
-```
-
-Executei o script de instalação
-```
-php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+apt-get update
+apt-get install nano -y
+nano --version
 ```
 
-E por fim, verifiquei a instalação com
+Arquivo a ser editado
 ```
-composer --version
+nano /etc/apache2/sites-available/000-default.conf
+```
+
+Adicionei as seguintes linhas
+```
+    ServerName poo
+
+    ServerAdmin webmaster@poo
+    DocumentRoot /var/www/html
+
+    <Directory /var/www/html>
+        AllowOverride All
+        Require all granted
+    </Directory>
 ```

@@ -7,16 +7,16 @@ services:
       - "90:80"
     volumes:
       - ./:/var/www/html
-  #   depends_on:
-  #     - db
+    depends_on:
+      - db
 
-  # db:
-  #   image: mysql:latest
-  #   container_name: task-db
-  #   ports:
-  #     - "3309:3306" #DEFINA SUA PORTA
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: root
-  #     MYSQL_DATABASE: task-manager
-  #     MYSQL_USER: user
-  #     MYSQL_PASSWORD: pass
+  db:
+    image: mysql:latest
+    container_name: poo-db
+    ports:
+      - "3309:3306" #DEFINA SUA PORTA
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: poo
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
